@@ -1,0 +1,67 @@
+@model CoreMvcOnlineTicariOtomasyon.Models.Employee
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+
+<h4>Sisteme personel ekle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create" enctype="multipart/form-data">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="FirstName" class="control-label"></label>
+                <input asp-for="FirstName" class="form-control" />
+                <span asp-validation-for="FirstName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LastName" class="control-label"></label>
+                <input asp-for="LastName" class="form-control" />
+                <span asp-validation-for="LastName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ImagePath" class="control-label" for="addFile"></label>
+                <input asp-for="ImagePath" class="form-control-file" type="file" id="addFile" multiple />
+                <span asp-validation-for="ImagePath" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DepartmentId" class="control-label"></label>
+                @Html.DropDownListFor(m => m.DepartmentId, (List<SelectListItem>)ViewBag.department, new { @class = "form-control" })
+                <span asp-validation-for="DepartmentId" class="text-danger"></span>
+            </div>
+
+
+
+
+            <div class="form-group form-check">
+                <fieldset>
+                    <p>Personel aktif olacak mı?</p>
+
+                    @Html.RadioButtonFor(e => e.Status, true, new { id = "status-true" })
+                    @Html.Label("status-true", "Evet")
+                    <br>
+                    @Html.RadioButtonFor(e => e.Status, false, new { id = "status-false" })
+                    @Html.Label("status-false", "Hayır")
+                </fieldset>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Ekle" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Listeye geri dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

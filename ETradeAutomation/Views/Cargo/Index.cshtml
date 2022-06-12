@@ -1,0 +1,93 @@
+﻿
+@model IEnumerable<CargoDetail>
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+<html>
+<body>
+
+    <div class="d-flex my-4 justify-content-between" style="padding-right: 3rem!important;">
+        <form asp-action="index" method="get" class=" d-flex">
+
+            <input class="form-control mx-4 ml-3" name="filterText" type="search" placeholder="Takip numarası ile ara">
+            <button class="btn btn-primary ripple-surface" type="submit">
+                Ara
+            </button>
+        </form>
+    </div>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <i class="fas fa-table me-1"></i>
+            Satışlar
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Takip Numarası</th>
+                        <th>Personel</th>
+                        <th>Alıcı</th>
+                        <th>Tarih</th>
+                        <th>Açıklama</th>
+                        <th>Detaylar</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <th>#</th>
+                        <th>Takip Numarası</th>
+                        <th>Personel</th>
+                        <th>Alıcı</th>
+                        <th>Tarih</th>
+                        <th>Açıklama</th>
+                        <th>Detaylar</th>
+                    </tr>
+                </tfoot>
+                <tbody>
+                    @foreach (var cargo in Model)
+                    {
+                        <tr>
+                            <td>@cargo.Id</td>
+                            <td>@cargo.TrackNumber</td>
+                            <td>@cargo.Employee</td>
+                            <td>@cargo.Receiver</td>
+                            <td>@cargo.Date</td>
+                            <td>@cargo.Description</td>
+                            <td>
+                                <a asp-action="track" asp-route-trackNumber="@cargo.TrackNumber" class="btn btn-secondary">Kargo Takip</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <a asp-action="add" class="btn btn-primary">Kargo ekle</a>
+        </div>
+    </div>
+
+
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
+    <script src="~/js/scripts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
+    <script src="~/assets/demo/chart-area-demo.js"></script>
+    <script src="~/assets/demo/chart-bar-demo.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" crossorigin="anonymous"></script>
+    <script src="~/js/datatables-simple-demo.js"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" />
+    <link href="~/css/styles.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
+
+
+

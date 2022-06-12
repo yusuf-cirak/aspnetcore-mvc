@@ -1,0 +1,76 @@
+@using CoreMvcOnlineTicariOtomasyon.Models
+
+@model Product
+@{
+    ViewData["Title"] = "Update";
+}
+
+<h4>Ürün güncelle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="update">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="BrandName" class="control-label"></label>
+                <input asp-for="BrandName" class="form-control" />
+                <span asp-validation-for="BrandName" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CategoryId" class="control-label"></label>
+                @Html.DropDownListFor(m => m.CategoryId,(List<SelectListItem>)ViewBag.value, new
+                {@class="form-control" })
+                <span asp-validation-for="CategoryId" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Stock" class="control-label"></label>
+                <input asp-for="Stock" class="form-control" />
+                <span asp-validation-for="Stock" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UnitBuyPrice" class="control-label"></label>
+                <input asp-for="UnitBuyPrice" class="form-control" />
+                <span asp-validation-for="UnitBuyPrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="UnitSellPrice" class="control-label"></label>
+                <input asp-for="UnitSellPrice" class="form-control" />
+                <span asp-validation-for="UnitSellPrice" class="text-danger"></span>
+            </div>
+
+            <div class="form-group form-check">
+                <fieldset>
+                    <p>Ürün aktif olarak satılacak mı?</p>
+
+                    @Html.RadioButtonFor(e => e.Status, true, new { id = "status-true" })
+                    @Html.Label("status-true", "Evet")
+                    <br>
+                    @Html.RadioButtonFor(e => e.Status, false, new { id = "status-false" })
+                    @Html.Label("status-false", "Hayır")
+                </fieldset>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye geri dön</a>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

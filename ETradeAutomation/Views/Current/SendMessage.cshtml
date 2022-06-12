@@ -1,0 +1,369 @@
+﻿@model Message 
+@{
+    ViewData["Title"] = "SendMessage";
+    Layout = "~/Views/Shared/_CurrentLayout.cshtml";
+    int currentId = -1;
+    //sayfa bazında bir değişkene atadık.
+    if (!(TempData["id"] is null))
+    {
+        int.TryParse(TempData["id"].ToString(), out currentId); // id değerini TryParse ile int'e dönüştürmeye çalış, dönüştürebilirsen out keyword'ü ile
+                                                                // currentId'ye ata.
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>AdminLTE 3 | Compose Message</title>
+
+    <!-- Tell the browser to be responsive to screen width -->
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+
+    <link rel="stylesheet" href="~/lib/AdminLTE-3.0.4/plugins/fontawesome-free/css/all.min.css">
+
+    <!-- Ionicons -->
+
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+
+    <!-- Theme style -->
+
+    <link rel="stylesheet" href="~/lib/AdminLTE-3.0.4/dist/css/adminlte.min.css">
+
+    <!-- summernote -->
+
+    <link rel="stylesheet" href="~/lib/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.css">
+
+    <!-- Google Font: Source Sans Pro -->
+
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+
+</head>
+
+<body class="hold-transition sidebar-mini">
+
+
+
+
+
+    <!-- Content Header (Page header) -->
+
+    <section class="content-header">
+
+        <div class="container-fluid">
+
+            <div class="row mb-2">
+
+                <div class="col-sm-6">
+
+                    <h1>Yeni Mesaj Oluştur</h1>
+
+                </div>
+
+
+
+            </div>
+
+        </div><!-- /.container-fluid -->
+
+    </section>
+
+    <!-- Main content -->
+
+    <section class="content">
+
+        <div class="container-fluid">
+
+            <div class="row">
+
+                <div class="col-md-3">
+
+                    <div class="card">
+
+                        <div class="card-header">
+
+                            <h3 class="card-title">Klasörler</h3>
+
+                            <div class="card-tools">
+
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+
+                                    <i class="fas fa-minus"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-body p-0">
+
+                            <ul class="nav nav-pills flex-column">
+
+                                <li class="nav-item active">
+
+                                    <a asp-action="messages" asp-route-id="@currentId" class="nav-link">
+
+                                        <i class="fas fa-inbox"></i> Gelen Kutusu
+
+                                        <span class="badge bg-primary float-right">@ViewBag.countReceivedMessages</span>
+
+                                    </a>
+
+                                </li>
+
+                                <li class="nav-item">
+
+                                    <a asp-action="sentmessages" asp-route-id="@currentId" class="nav-link">
+
+                                        <i class="far fa-envelope"></i> Gönderilen Mesaj
+                                        <span class="badge bg-primary float-right">@ViewBag.countSentMessages</span>
+
+
+                                    </a>
+
+                                </li>
+
+                                <li class="nav-item">
+
+                                    <a href="#" class="nav-link">
+
+                                        <i class="far fa-file-alt"></i> Taslaklar
+
+                                    </a>
+
+                                </li>
+
+                                <li class="nav-item">
+
+                                    <a href="#" class="nav-link">
+
+                                        <i class="fas fa-filter"></i> Gereksiz Mesajlar
+
+                                        <span class="badge bg-warning float-right">65</span>
+
+                                    </a>
+
+                                </li>
+
+                                <li class="nav-item">
+
+                                    <a href="#" class="nav-link">
+
+                                        <i class="far fa-trash-alt"></i> Çöp Kutusu
+
+                                    </a>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                        <!-- /.card-body -->
+
+                    </div>
+
+                    <!-- /.card -->
+
+                    <div class="card">
+
+                        <div class="card-header">
+
+                            <h3 class="card-title">Filtreler</h3>
+
+                            <div class="card-tools">
+
+                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
+
+                                    <i class="fas fa-minus"></i>
+
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <div class="card-body p-0">
+
+                            <ul class="nav nav-pills flex-column">
+
+                                <li class="nav-item">
+
+                                    <a href="#" class="nav-link">
+
+                                        <i class="far fa-circle text-danger"></i>
+
+                                        Önemli
+
+                                    </a>
+
+                                </li>
+
+                                <li class="nav-item">
+
+                                    <a href="#" class="nav-link">
+
+                                        <i class="far fa-circle text-warning"></i> Promosyon
+
+                                    </a>
+
+                                </li>
+
+                                <li class="nav-item">
+
+                                    <a href="#" class="nav-link">
+
+                                        <i class="far fa-circle text-primary"></i>
+
+                                        Sosyal
+
+                                    </a>
+
+                                </li>
+
+                            </ul>
+
+                        </div>
+
+                        <!-- /.card-body -->
+
+                    </div>
+
+                    <!-- /.card -->
+
+                </div>
+
+                <!-- /.col -->
+
+                <div class="col-md-9">
+
+                    <div class="card card-primary card-outline">
+
+                        <div class="card-header">
+
+                            <h3 class="card-title">Yeni Mesaj</h3>
+
+                        </div>
+
+                        <!-- /.card-header -->
+                        <form asp-action="sendmessage" method="post">
+                            
+
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <label asp-for="Sender" class="control-label"></label>
+                                    <input asp-for="Sender" class="form-control" value="@TempData["eMail"]" readonly />
+                                    <span asp-validation-for="Sender" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Receiver" class="control-label"></label>
+                                    <input asp-for="Receiver" class="form-control" placeholder="Kime" />
+                                    <span asp-validation-for="Receiver" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Subject" class="control-label"></label>
+                                    <input asp-for="Subject" class="form-control" placeholder="Konu" />
+                                    <span asp-validation-for="Subject" class="text-danger"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="Description" class="control-label"></label>
+                                    <textarea id="compose-textarea" style="height: 300px" asp-for="Description" class="form-control" placeholder="Mesajınız"></textarea>
+                                    <span asp-validation-for="Description" class="text-danger"></span>
+                                </div>
+
+                                <div class="form-group">
+
+                                    <div class="btn btn-default btn-file">
+
+                                        <i class="fas fa-paperclip"></i> Dosya Seçiniz
+
+                                        <input type="file" name="attachment">
+
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <!-- /.card-body -->
+
+                            <div class="card-footer">
+
+                                <div class="float-right">
+
+                                    <button type="button" class="btn btn-default"><i class="fas fa-pencil-alt"></i> Taslak</button>
+
+                                    <button type="submit" class="btn btn-primary"><i class="far fa-envelope"></i> Gönder</button>
+
+                                </div>
+
+                                <button type="reset" class="btn btn-default"><i class="fas fa-times"></i> Değişiklikleri geri al</button>
+
+                            </div>
+                        </form>
+
+                        <!-- /.card-footer -->
+
+                    </div>
+
+                    <!-- /.card -->
+
+                </div>
+
+                <!-- /.col -->
+
+            </div>
+
+            <!-- /.row -->
+
+        </div><!-- /.container-fluid -->
+
+    </section>
+
+    <!-- /.content -->
+    <!-- ./wrapper -->
+    <!-- jQuery -->
+
+    <script src="~/lib/AdminLTE-3.0.4/plugins/jquery/jquery.min.js"></script>
+
+    <!-- Bootstrap 4 -->
+
+    <script src="~/lib/AdminLTE-3.0.4/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- AdminLTE App -->
+
+    <script src="~/lib/AdminLTE-3.0.4/dist/js/adminlte.min.js"></script>
+
+    <!-- AdminLTE for demo purposes -->
+
+    <script src="~/lib/AdminLTE-3.0.4/dist/js/demo.js"></script>
+
+    <!-- Summernote -->
+
+    <script src="~/lib/AdminLTE-3.0.4/plugins/summernote/summernote-bs4.min.js"></script>
+
+    <!-- Page Script -->
+
+    <script>
+$(function () {
+
+    //Add text editor
+
+    $('#compose-textarea').summernote()
+
+  })</script>
+
+</body>
+
+</html>
+

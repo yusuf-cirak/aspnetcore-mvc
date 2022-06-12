@@ -1,0 +1,25 @@
+﻿@model CoreMvcOnlineTicariOtomasyon.Models.Admin
+
+@{
+    Layout = null;
+}
+
+
+<div id="small-dialog1" class="mfp-hide book-form">
+
+    <div class="login-form login-form-left">
+        <div class="agile-row">
+            <h3>Yetkili Girişi</h3>
+            <div class="clear"></div>
+            <div class="login-agileits-top">
+                <form asp-action="adminlogin" method="post">
+                    <input type="text" class="name" asp-for="UserName" Placeholder="Kullanıcı Adı" required="" />
+                    <input type="password" class="password" asp-for="Password" placeholder="Şifreniz" required />
+
+                    <input type="submit" value="Giriş yap">
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>

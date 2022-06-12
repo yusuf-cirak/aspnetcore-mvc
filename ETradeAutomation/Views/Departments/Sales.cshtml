@@ -1,0 +1,37 @@
+@using CoreMvcOnlineTicariOtomasyon.Models
+@model IEnumerable<SaleMovement>
+@{
+    ViewData["Title"] = "Sales";
+}
+
+<h2>Satışlar</h2>
+<br />
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Personel : @ViewBag.employee</li>
+</ol>
+<table class="table table-condensed">
+    <tr>
+        <th>Satış Id</th>
+        <th>Ürün</th>
+        <th>Cari</th>
+        <th>Fiyat</th>
+        <th>Adet</th>
+        <th>Toplam</th>
+        <th>Tarih</th>
+        <th>Yazdır</th>
+    </tr>
+
+    @foreach (var sale in Model)
+    {
+<tr>
+    <td>@sale.Id</td>
+    <td>@sale.Product.Name</td>
+    <td>@sale.Current.FirstName @sale.Current.LastName</td>
+    <td>@sale.Price ₺</td>
+    <td>@sale.Amount</td>
+    <td>@sale.TotalPrice</td>
+    <td>@sale.Date</td>
+    <td><a href="#" class="btn btn-default" style="background-color:dodgerblue">Yazdır</a></td>
+</tr>
+    }
+</table>

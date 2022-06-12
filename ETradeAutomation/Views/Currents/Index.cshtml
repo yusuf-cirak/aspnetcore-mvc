@@ -1,0 +1,36 @@
+@model IEnumerable<CoreMvcOnlineTicariOtomasyon.Models.Current>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Cari Listesi</h2>
+<br />
+
+<table class="table table-striped">
+    <tr>
+        <th>Cari Id</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Şehir</th>
+        <th>E-posta</th>
+    </tr>
+
+    @foreach (var current in Model)
+    {
+        <tr>
+            <td>@current.Id</td>
+            <td>@current.FirstName</td>
+            <td>@current.LastName</td>
+            <td>@current.City</td>
+            <td>@current.Email</td>
+            <td>
+                <a asp-action="Delete" asp-route-id="@current.Id" class="btn btn-danger">Sil</a>
+                <a asp-action="Edit" asp-route-id="@current.Id" class="btn btn-warning">Güncelle</a>
+                <a asp-action="Sales" asp-route-id="@current.Id" class="btn btn-secondary">Satış Geçmişi</a>
+            </td>
+        </tr>
+
+    }
+</table>
+<a asp-action="Create" class="btn btn-success">Yeni Cari Ekle</a>

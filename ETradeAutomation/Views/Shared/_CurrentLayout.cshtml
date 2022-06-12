@@ -1,0 +1,127 @@
+﻿
+
+@{
+    Layout = null;
+    int currentId = -1;
+    //sayfa bazında bir değişkene atadık.
+    if (!(TempData["id"] is null))
+    {
+        int.TryParse(TempData["id"].ToString(), out currentId); // id değerini TryParse ile int'e dönüştürmeye çalış, dönüştürebilirsen out keyword'ü ile
+                                                                // currentId'ye ata.
+    }
+
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+
+
+
+
+
+
+    <!-- eğer development ise aşağıdakiler eklenir yoksa eklenmez..-->
+    <environment include="Development">
+        <title>MVC5 Ticari Otomasyon</title>
+        <script src="~/lib/fontawesome-free-5.15.4-web/css/all.css"></script>
+        <link href="~/css/styles.css" rel="stylesheet" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+
+    <!--
+    çalışma ortamı, development, test ve production gibi kendi isimlendirmelerin olabilir.
+        -->
+    @await RenderSectionAsync("Head", required: false)
+
+</head>
+<body>
+    <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
+        <!-- Navbar Brand-->
+        <a class="navbar-brand ps-3" asp-controller="home" asp-action="index">Ticari Otomasyon</a>
+        <!-- Sidebar Toggle-->
+        <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
+        <!-- Navbar Search-->
+        <form class="d-none d-md-inline-block form-inline ms-auto me-0 me-md-3 my-2 my-md-0">
+            <div class="input-group">
+                <input class="form-control" type="text" placeholder="Aranacak kelimeyi girin..." aria-label="Search for..." aria-describedby="btnNavbarSearch" />
+                <button class="btn btn-primary" id="btnNavbarSearch" type="button"><i class="fas fa-search"></i></button>
+            </div>
+        </form>
+        <!-- Navbar-->
+        <ul class="navbar-nav ms-auto ms-md-0 me-3 me-lg-4">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                    <li><a class="dropdown-item" asp-controller="current" asp-action="usersettings" asp-route-id="@currentId">Ayarlar</a></li>
+                    <li><a class="dropdown-item" asp-controller="current" asp-action="panel" asp-route-id="@currentId">Hesabım</a></li>
+                    <li><hr class="dropdown-divider" /></li>
+                    <li><a class="dropdown-item" asp-controller="auth" asp-action="logout">Çıkış</a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+    <div id="layoutSidenav">
+        <div id="layoutSidenav_nav">
+            <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+                <div class="sb-sidenav-menu">
+                    <div class="nav">
+                        <a asp-controller="current" asp-action="panel" asp-route-id="@currentId" class="nav-link">
+                            <div class="sb-nav-link-icon"><i class="fas fa-address-card"></i></div>
+                            Profilim
+                        </a>
+                        <a asp-controller="current" asp-action="orders" asp-route-id="@currentId" class="nav-link">
+                            <div class="sb-nav-link-icon"><i class="fas fa-box"></i></div>
+                            Siparişlerim
+                        </a>
+                        <a asp-controller="current" asp-action="cargodetails" asp-route-id="@currentId" class="nav-link">
+                            <div class="sb-nav-link-icon"><i class="fas fa-truck"></i></div>
+                            Kargo Takibi
+                        </a>
+                        <a asp-controller="current" asp-action="messages" asp-route-id="@currentId" class="nav-link">
+                            <div class="sb-nav-link-icon"><i class="fas fa-envelope"></i></div>
+                            Mesajlar
+                        </a>
+                        <a asp-controller="auth" asp-action="logout" class="nav-link">
+                            <div class="sb-nav-link-icon"><i class="fas fa-sign-out-alt"></i></div>
+                            Çıkış Yap
+                        </a>
+                    </div>
+                </div>
+            </nav>
+        </div>
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+                    @RenderBody()
+                </div>
+            </main>
+        </div>
+    </div>
+
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/js/scripts.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    <script src="~/lib/fontawesome-free-5.15.4-web/css/all.css"></script>
+    <script src="~/lib/fontawesome-free-5.15.4-web/js/all.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js" async defer></script>
+    <!-- Scriptlerde async ve defer nedir?-->
+    <!-- burası işte alt sayfalarda override etmeye yarıyor diyebiliriz.bu şekilde index ve delete html sayfaları yüklenince oradaki section Scripts kodları buraya geliyor. -->
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
+
+
+

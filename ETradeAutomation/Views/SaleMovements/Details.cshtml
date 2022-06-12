@@ -1,0 +1,35 @@
+@model CoreMvcOnlineTicariOtomasyon.Models.SaleMovement
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Satış Detayı</h2>
+<br />
+<table class="table table-condensed">
+    <tr>
+        <th>Satış Id</th>
+        <th>Ürün</th>
+        <th>Cari</th>
+        <th>Fiyat</th>
+        <th>Adet</th>
+        <th>Toplam</th>
+        <th>Tarih</th>
+        <th>Yazdır</th>
+    </tr>
+<tr>
+    <td>@Model.Id</td>
+    <td>@Model.Product.Name</td>
+    <td>@Model.Current.FirstName @Model.Current.LastName</td>
+    <td>@Model.Price</td>
+    <td>@Model.Amount</td>
+    <td>@Model.TotalPrice</td>
+    <td>@Model.Date</td>
+    <td><a href="#" class="btn btn-default" style="background-color:dodgerblue">Yazdır</a></td>
+
+</tr>
+</table>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Düzenle</a>
+    <a asp-action="Index" class="btn btn-secondary">Listeye geri dön</a>
+</div>

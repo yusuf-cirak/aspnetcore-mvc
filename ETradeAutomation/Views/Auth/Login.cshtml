@@ -1,0 +1,30 @@
+﻿@model CoreMvcOnlineTicariOtomasyon.Models.Current
+
+@{
+    Layout = null;
+}
+
+<div id="small-dialog" class="mfp-hide book-form">
+
+    <div class="login-form login-form-left">
+        <div class="agile-row">
+            <h3>Cari girişi</h3>
+            <span class="fa fa-lock"></span>
+            <div class="clear"></div>
+            <div class="login-agileits-top">
+                <form asp-action="login" method="post">
+                    <input type="email" class="email" asp-for="Email" placeholder="E-posta adresiniz" required />
+
+                    <input type="password" class="password" asp-for="Password" placeholder="Şifreniz" required />
+
+                    <input type="submit" value="Giriş yap">
+                </form>
+            </div>
+            <div class="login-agileits-bottom">
+                <h6><a href="#">Şifrenizi mi unuttunuz?</a></h6>
+            </div>
+        </div>
+    </div>
+
+</div>
+

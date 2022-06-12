@@ -1,0 +1,56 @@
+@model ETradeErkanHurnalıP2.Models.Product
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>Product</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="row"> <!--Bootstrap grid yapısı sayesinde, rowlar sayesinde responsive kodlar yazıyoruz. Telefonda ekran döndürüldüğünde duyarlı bir şekilde sayfanın aşağı kayması vb.-->
+    @foreach (var item in Model.Images)
+    {
+        
+            <span>
+                <img src="\images\@item.ImagePath" style="height: 100px;" class="img-thumbnail">
+                <a asp-controller="products" asp-action="deleteimage" asp-route-id="@item.Id" class="btn btn-outline-danger">Sil</a>
+            </span>
+        
+    }
+</div>
+    
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

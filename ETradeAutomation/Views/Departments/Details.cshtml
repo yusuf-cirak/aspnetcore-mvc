@@ -1,0 +1,38 @@
+@using CoreMvcOnlineTicariOtomasyon.Models
+@model List<Employee>
+@{
+    ViewData["Title"] = "Details";
+}
+
+<br />
+<h2>Departman detay sayfası</h2>
+<br />
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active">Departman adı : @ViewBag.department</li>
+</ol>
+
+<div style="background-color:darkblue"></div>
+<br />
+
+<table class="table table-hover">
+    <tr>
+        <th>Personel Id</th>
+        <th>Ad</th>
+        <th>Soyad</th>
+        <th>Resim</th>
+        <th>Satışlar</th>
+    </tr>
+
+    @foreach (var employee in Model)
+    {
+<tr>
+    <td>@employee.Id</td>
+    <td>@employee.FirstName</td>
+    <td>@employee.LastName</td>
+    <td>@employee.ImageUrl</td>
+    <td><a asp-action="sales" asp-route-id="@employee.Id" class="btn btn-outline-info">Satışlar</a></td>
+
+</tr>
+    }
+
+</table>

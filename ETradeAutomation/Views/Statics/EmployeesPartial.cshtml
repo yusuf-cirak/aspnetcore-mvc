@@ -1,0 +1,45 @@
+﻿@using CoreMvcOnlineTicariOtomasyon.Models.DTOs
+@model IEnumerable<EmployeesDepartmentDto>
+
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Departman Personel Sayıları</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body p-0">
+        <table class="table table-sm">
+            <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Departman</th>
+                    <th>Progress Bar</th>
+                    <th style="width: 40px">Sayı</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int number = 0;}
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@{number++;}@number</td>
+                        <td>@item.Department</td>
+                        <td>
+                            <div class="progress progress-xs">
+                                <div class="progress-bar progress-bar-danger" style="width:65px;"></div>
+                            </div>
+                        </td>
+                        <td><span class="badge bg-danger">@item.Count</span></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>

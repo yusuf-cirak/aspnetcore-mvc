@@ -1,0 +1,20 @@
+﻿
+@{
+
+}
+
+<br />
+
+
+<div>
+    <form method="post" asp-action="index">
+        <input type="text" name="code" />
+        <input type="submit" value="QR kodu oluştur" />
+
+    </form>
+
+    @if (ViewBag.qrCodeImage!=null)
+    {
+        <img src="@ViewBag.qrCodeImage" alt="" style="width:400px;height:400px;" />
+    }
+</div>

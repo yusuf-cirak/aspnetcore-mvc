@@ -1,0 +1,63 @@
+@model CoreMvcOnlineTicariOtomasyon.Models.Bill
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<h4>Faturayı düzenle</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="SerialNumber" class="control-label"></label>
+                <input asp-for="SerialNumber" class="form-control" />
+                <span asp-validation-for="SerialNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LineNumber" class="control-label"></label>
+                <input asp-for="LineNumber" class="form-control" />
+                <span asp-validation-for="LineNumber" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TaxAdministration" class="control-label"></label>
+                <input asp-for="TaxAdministration" class="form-control" />
+                <span asp-validation-for="TaxAdministration" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Hour" class="control-label"></label>
+                <input asp-for="Hour" class="form-control" />
+                <span asp-validation-for="Hour" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DeliveryPerson" class="control-label"></label>
+                <input asp-for="DeliveryPerson" class="form-control" />
+                <span asp-validation-for="DeliveryPerson" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ReceiverPerson" class="control-label"></label>
+                <input asp-for="ReceiverPerson" class="form-control" />
+                <span asp-validation-for="ReceiverPerson" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalPrice" class="control-label"></label>
+                <input asp-for="TotalPrice" class="form-control" />
+                <span asp-validation-for="TotalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Listeye geri dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

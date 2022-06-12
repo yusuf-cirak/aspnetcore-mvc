@@ -1,0 +1,119 @@
+﻿@model SellProductViewModel
+
+@{
+    ViewData["Title"] = "Sell";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+
+
+
+<h4>Satış oluştur</h4>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="sell">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input type="hidden" value="@Model.ProductId" id="productId" name="productId" />
+
+                <label asp-for="ProductId" class="control-label"></label>
+                <input type="text" asp-for="Product.Name" class="form-control" readonly />
+                <span asp-validation-for="ProductId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+
+                <label asp-for="EmployeeId" class="control-label"></label>
+                @Html.DropDownListFor(m => m.EmployeeId, Model.Employees, new { @class = "form-control",name="employeeId",id="employeeId" })
+
+                @*<select id="employeeId" name="employeeId" class="form-control">
+            @foreach (var item in Model.Employees)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>*@
+                <span asp-validation-for="EmployeeId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CurrentId" class="control-label"></label>
+                @Html.DropDownListFor(m => m.CurrentId, Model.Currents, new { @class = "form-control", name = "currentId", id = "currentId" })
+                @*<select id="currentId" name="currentId" class="form-control">
+            @foreach (var item in Model.Currents)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>*@
+
+                <span asp-validation-for="CurrentId" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="Amount" class="control-label"></label>
+                <input asp-for="Amount" id="amount" type="number" min="1" onchange="sum()" class="form-control" />
+                <span asp-validation-for="Amount" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Price" class="control-label"></label>
+                <input asp-for="Price" id="price" onkeyup="sum()" type="number" class="form-control" />
+                <span asp-validation-for="Price" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="TotalPrice" class="control-label"></label>
+                <input asp-for="TotalPrice" type="number" id="totalPrice" class="form-control" readonly />
+                <span asp-validation-for="TotalPrice" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<div>
+    <a asp-action="Index" class="btn btn-secondary">Listeye geri dön</a>
+</div>
+
+
+
+
+@section Scripts{ 
+    <script>
+        function sum() {
+
+            var amount = document.getElementById('amount').value;
+            var price = document.getElementById('price').value;
+            var totalPrice = parseInt(amount) * parseInt(price);
+            if (!isNaN(totalPrice)) {
+                document.getElementById('totalPrice').value = totalPrice;
+            }
+
+        }
+    </script>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

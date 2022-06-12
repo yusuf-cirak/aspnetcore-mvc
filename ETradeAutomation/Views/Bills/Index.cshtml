@@ -1,0 +1,92 @@
+@using CoreMvcOnlineTicariOtomasyon.Models
+
+@model IEnumerable<CoreMvcOnlineTicariOtomasyon.Models.Bill>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table table-bordered" style="margin-top:20px;">
+    <tr>
+        <th>Id</th>
+        <!--Table head-->
+        <th>Fatura Seri No & Fatura Sıra No</th>
+        <!--Table head-->
+        <th>Vergi Dairesi</th>
+        <!--Table head-->
+        <th>Tarih</th>
+        <!--Table head-->
+        <th>Saat</th>
+        <!--Table head-->
+        <th>Toplam Tutar</th>
+        <!--Table head-->
+        <th>Teslim Eden Kişi</th>
+        <!--Table head-->
+        <th>Teslim Alan Kişi</th>
+        <th>İşlemler</th>
+        <!--Table head-->
+    </tr>
+    <!--Table row-->
+
+    @foreach (var bill in Model)
+    {
+        <tr>
+            <td>@bill.Id</td>
+            <td>@bill.SerialNumber & @bill.LineNumber</td>
+            <td>@bill.TaxAdministration</td>
+            <td>@Convert.ToDateTime(bill.Date).ToString("dd/mm/yyyy")</td>
+            <td>@bill.Hour</td>
+            <td>@bill.TotalPrice</td>
+            <td>@bill.DeliveryPerson</td>
+            <td>@bill.ReceiverPerson</td>
+            <td>
+                <a asp-action="createbillpen" asp-route-id="@bill.Id" class="btn btn-warning">Yeni Kalem</a>
+                <a asp-action="edit" asp-route-id="@bill.Id" class="btn btn-info">Güncelle</a>
+                <a asp-action="details" asp-route-id="@bill.Id" class="btn btn-light">Detaylar</a>
+            </td>
+        </tr>
+    }
+</table>
+<a asp-action="create" class="btn btn-primary">Yeni fatura girişi</a>
+<a asp-action="createbillpen" class="btn btn-secondary">Yeni fatura kalem girişi</a>
+
+
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Popup Penceresi
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Fatura Modal Ekranı</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>Fatura Seri No</th>
+                        <th>Fatura Sıra No</th>
+                        <th>Toplam Tutar</th>
+                    </tr>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+
+                            <td>@item.SerialNumber</td>
+                            <td>@item.LineNumber</td>
+                            <td>@item.TotalPrice</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+

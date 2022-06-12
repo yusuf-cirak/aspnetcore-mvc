@@ -1,0 +1,40 @@
+@model IEnumerable<CoreMvcOnlineTicariOtomasyon.Models.Employee>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Personel Listesi</h2>
+<br />
+
+<table class="table table-bordered" style="margin-top:20px;">
+    <tr>
+        <th>Id</th> <!--Table head-->
+        <th>İsim</th> <!--Table head-->
+        <th>Departman</th> <!--Table head-->
+        <th>Resim</th> <!--Table head-->
+
+    </tr> <!--Table row-->
+    @foreach (var employee in Model)
+    {
+        <tr>
+            <td>@employee.Id</td>
+            <td>@employee.FirstName @employee.LastName</td>
+            <td>@employee.Department.Name</td>
+            <td>
+                <img src="@employee.ImageUrl" style="width:150px;height:150px"/>
+            </td>
+            <td>
+                <a asp-controller="departments" asp-action="sales" asp-route-id="@employee.Id" class="btn btn-primary">Satışlar</a>
+                <a asp-action="edit" asp-route-id="@employee.Id" class="btn btn-warning">Güncelle</a>
+                <a asp-action="delete" asp-route-id="@employee.Id" class="btn btn-danger">Sil</a>
+            </td>
+
+
+
+
+        </tr>
+    }
+</table>
+            <a asp-action="create" class="btn btn-primary">Personel ekle</a>
+

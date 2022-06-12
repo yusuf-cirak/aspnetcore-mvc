@@ -1,0 +1,112 @@
+@using CoreMvcOnlineTicariOtomasyon.Models
+
+@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Tüm Ürünler</h1>
+<br>
+
+
+<div class="d-flex my-4 justify-content-between" style="padding-right: 3rem!important;">
+    <form asp-action="index" method="get" class=" d-flex">
+
+        <input class="form-control mx-4 ml-3" name="filterText" type="search" placeholder="İsme göre ara">
+        <button class="btn btn-primary ripple-surface" type="submit">
+            Ara
+        </button>
+    </form>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>ÜRÜN</th>
+            <th>MARKA</th>
+            <th>STOK</th>
+            <th>ALIŞ FİYAT</th>
+            <th>SATIŞ FİYAT</th>
+            <th>KATEGORİ</th>
+            <th>RESİM</th>
+            <th>İŞLEMLER</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- burada classlar ile gidebiliriz.-->
+        @foreach (var product in Model)
+        {
+            <tr>
+                <td>@product.Id</td>
+                <td>@product.Name</td>
+                <td>@product.BrandName</td>
+                <td>@product.Stock</td>
+                <td>@product.UnitBuyPrice ₺</td>
+                <td>@product.UnitSellPrice ₺</td>
+                <td>@product.Category.Name</td>
+                <td>
+                    <img src="@product.Image" style="width:200px;height:200px" />
+                </td>
+                <td>
+                    <a asp-controller="products" asp-action="details" asp-route-id="@product.Id"
+                       class="btn btn-outline-primary">Detaylar</a>
+                    <a asp-controller="products" asp-action="update" asp-route-id="@product.Id"
+                       class="btn btn-outline-secondary">Güncelle</a>
+
+                    <form class="formDelete js-form-delete" asp-controller="products" asp-action="deleteconfirmed" method="post">
+                        <input type="hidden" name="productId" value="@product.Id" />
+                        <button type="button" class="btn btn-outline-danger js-btn-delete">Sil</button>
+                    </form>
+
+                    <a asp-controller="products" asp-action="sell" asp-route-id="@product.Id"
+                       class="btn btn-outline-warning">Satış Yap</a>
+
+                </td>
+            </tr>
+
+        }
+    </tbody>
+</table>
+<a asp-controller="products" asp-action="add" class="btn btn-outline-info">Yeni ürün ekle</a>
+
+
+
+
+@section Scripts{
+    <script>
+        "use strict"; // her zaman kullan.
+        (function () {
+            //const btnDelete = document.getElementById("btnDelete2");
+
+            /* const btnDeleteWithJquery = $("#btnDelete");*/
+
+
+            //const formDelete2 = document.getElementById("formDelete2");
+
+            async function deleteconfirmed() {
+                const result = await swal({
+                    title: "Ürünü silmek istediğinizden emin misiniz?",
+                    text: "Ürün silindiğinde geri alınamayacaktır.",
+                    icon: "warning",
+                    buttons: true,
+                    dangerMode: true,
+                });
+                return result;
+            }
+
+            //  $(".js-btn-delete", ".js-form-delete")  =  $(".js-form-delete .js-btn-delete")
+            // bu ikisi aynı seçimdir.   .js-form-delete içindeki tüm .js-btn-delete clasına sahip elemanları seçer.
+            $(".js-btn-delete", ".js-form-delete").on("click", async function (e) {
+                e.preventDefault();
+                let response = await deleteconfirmed();
+                if (response) { 
+                    let parentForm = $(this).closest(".js-form-delete");
+                    $(parentForm).submit();
+                }
+            })
+
+        })();
+
+    </script>
+}

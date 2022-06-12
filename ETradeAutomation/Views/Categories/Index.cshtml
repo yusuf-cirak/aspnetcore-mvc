@@ -1,0 +1,37 @@
+
+@using X.PagedList
+
+@using X.PagedList.Mvc.Core
+
+@*@model IEnumerable<Category>*@
+@model X.PagedList.IPagedList<Category>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<table class="table table-bordered" style="margin-top:20px;">
+    <tr>
+        <th>Id</th> <!--Table head-->
+        <th>Kategori</th> <!--Table head-->
+
+    </tr> <!--Table row-->
+    @foreach (var category in Model)
+    {
+        <tr>
+            <td>@category.Id</td>
+            <td>@category.Name</td>
+            <td><a asp-action="update" asp-route-id="@category.Id" class="btn btn-outline-warning">Güncelle</a></td>
+            <td><a asp-action="delete" asp-route-id="@category.Id" class="btn btn-outline-danger">Sil</a></td>
+
+
+        </tr>
+    }
+</table>
+
+<td><a asp-action="add" class="btn btn-outline-primary btn-sm">Kategori ekle</a></td>
+
+<tr>
+    <td>@Html.PagedListPager((IPagedList)Model, page => Url.Action("index", new { page }))</td>
+</tr>
+

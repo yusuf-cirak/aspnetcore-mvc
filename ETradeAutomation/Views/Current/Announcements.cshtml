@@ -1,0 +1,49 @@
+﻿
+@model List<Message>
+
+
+@foreach (var item in Model)
+{
+
+    <div class="timeline timeline-inverse">
+
+        <!-- timeline time label -->
+
+        <div class="time-label">
+
+            <span class="bg-warning">
+
+                @item.Date.ToShortDateString()
+
+            </span>
+
+        </div>
+
+        <!-- /.timeline-label -->
+        <!-- timeline item -->
+
+        <div>
+
+            <i class="fas fa-envelope bg-primary"></i>
+
+            <div class="timeline-item">
+
+                <span class="time"><i class="far fa-clock"></i> @item.Date.ToString("hh/mm")</span>
+
+                <h3 class="timeline-header"><a href="#">@item.Sender</a> size bir posta gönderdi</h3>
+                <h4 class="timeline-header"><a href="#">@item.Subject</a></h4>
+
+                <div class="timeline-body">
+
+                    @item.Description
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+}
+

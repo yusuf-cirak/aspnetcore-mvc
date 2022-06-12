@@ -1,0 +1,58 @@
+@model CoreMvcOnlineTicariOtomasyon.Models.Department
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Departman Oluştur</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @* <label class="form-check-label">
+                    <input class="form-check-input" asp-for="Status" /> @Html.DisplayNameFor(model => model.Status)
+                    </label> *@
+                    <p>Departman aktif olacak mı?</p>
+                    <div class="form-group form-check">
+                <input type="radio" id="statustrue" asp-for="Status" name="Status" value="true" />
+                <label class="form-check-label" for="statustrue">
+                    Evet
+                </label>
+            </div>
+            <div class="form-group form-check">
+                <input type="radio" id="statusfalse" asp-for="Status" name="Status" value="false" />
+                <label class="form-check-label" for="statusfalse">
+                    Hayır
+                </label>
+            </div>
+                @* <fieldset>
+                    <p>Departman aktif olacak mı?</p>
+
+                    @Html.RadioButtonFor(e => e.Status, true, new { id = "status-true" })
+                    @Html.Label("status-true", "Evet")
+                    <br>
+                    @Html.RadioButtonFor(e => e.Status, false, new { id = "status-false" })
+                    @Html.Label("status-false", "Hayır")
+                </fieldset> *@
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Listeye geri dön</a>
+</div>
+
+@section Scripts {
+@{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
