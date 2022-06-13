@@ -16,9 +16,3 @@ These projects built with .NET5 MVC.
 ## ⚖️ License
 
 Distributed under the MIT License. See [MIT](https://choosealicense.com/licenses/mit/) for more information.
-
-
-## 🙏 Acknowledgements
-
- - [Erkan Hürnalı](https://www.linkedin.com/in/erkanh%C3%BCrnal%C4%B1/)
- - [Murat Yücedağ](https://www.linkedin.com/in/murat-y%C3%BCceda%C4%9F-186933149/)
