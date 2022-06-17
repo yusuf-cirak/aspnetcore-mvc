@@ -1,7 +1,7 @@
 
 # aspnetcore-mvc
 
-These projects built with .NET5 MVC.
+These projects built with ASP.NET 5 MVC.
 
 
 
